@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom';
 import App from './App.jsx';
+import Forum from './Forum.jsx'
 import { NavBar } from './components';
 
 const router = createBrowserRouter([
@@ -16,6 +17,17 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/forum",
+    element: <Forum />,
+    errorElement: <><h1>404 Error</h1><Link to="/">Go home</Link></>,
+    children: [
+      {
+        path: "/forum",
+        element: <NavBar />
+      }
+    ],
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
