@@ -1,3 +1,40 @@
 div > a {
   text-decoration: none;
+  color: inherit;
+}
+$lightmode-blue-base: rgba(0, 100, 255, 0.8);
+a {
+  padding: 20px;
+  margin: 0px;
+  /* color: $lightmode-blue-base;
+  visibility: hidden; */
+  height: 40px;
+  width: 100px;
+  float: left;
+}
+/*a:hover {
+  padding: 20px;
+  cursor: pointer;
+  background: rgba(0, 0, 255, 0.4);
+  color: white;
+  max-height: 40px;
+} */
+.nav {
+  padding: 10px;
+  background: $lightmode-blue-base;
+  position: fixed;
+  color: rgba(0, 0, 0, 0);
+  top: 0;
+  left: 0;
+  width: 10px;
+  max-width: 100px;
+  height: 100%;
+}
+.nav:hover {
+  width: 100px;
+  color: white;
+  display: block;
+}
+body {
+  padding: 20px;
 }

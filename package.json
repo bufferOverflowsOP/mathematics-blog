@@ -11,14 +11,15 @@
   },
   "dependencies": {
     "@firebase/firestore": "^4.6.0",
-    "firebase": "^10.12.1",
-    "firebase-tools": "^13.7.1",
+    "firebase": "^10.12.2",
+    "firebase-tools": "^13.11.0",
     "global": "^4.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-latex-next": "^3.0.0",
     "react-router-dom": "^6.22.3",
-    "sass": "^1.74.1"
+    "sass": "^1.74.1",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

@@ -2,11 +2,15 @@
     font-family: sans-serif;
 }
 .title {
-    font-size: 26px;
+    font-size: 26pt;
+    margin-top: 50px;
 }
 p {
-    font-size: 15px;
+    font-size: 15pt;
 }
 .preview {
     display: inline;
+}
+textarea {
+    resize: none;
 }
