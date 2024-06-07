@@ -1,20 +1,28 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom'; 
 import { getMsgs } from './firebase-functions';
-import 'katex/dist/katex.min.css';
-import Latex from 'react-latex-next';
+import Box from './components/Box';
 
 const App = () => {
   const [subject, setSubject] = useState("main");
   const [channel, setChannel] = useState("main");
   const [msgs, setMsgs] = useState([]);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getMsgs(subject, channel).then((data) => {
+        setMsgs(data);
+      })
+    }, 5000)
+    return () => clearInterval(interval)
+  }, []);
 
   useEffect(() => {
-    getMsgs(subject, channel).then((data) => {
-      setMsgs(data);
-    })
-  }, [subject, channel]);
-
+      getMsgs(subject, channel).then((data) => {
+        setMsgs(data);
+      })
+    }
+  );
   useEffect(() => {
     var subjectLS = localStorage.getItem("subject");
     var channelLS = localStorage.getItem("channel");
@@ -45,8 +53,11 @@ const App = () => {
       <p>Channel:</p>
       <input type="text" placeholder="Channel" value={channel} onChange={handleChannelChange} />
       <br /> <br />
-      { !!msgs ? (msgs.map((msg) => {
-          return (<><Latex>{msg.text}</Latex><p>Posted by: {msg.username}</p></>)})) : <p>No messages</p> }
+      { true ? (msgs.map((msg) => {
+        <Box username={msg.username} pfp={msg.pfp} text={msg.text} />
+      }))
+        : <p>No messages</p>
+      }
     </>
   )
   }

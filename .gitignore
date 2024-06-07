@@ -25,3 +25,4 @@ build
 *.sw?
 # IDX
 .idx
+firebase-config.js

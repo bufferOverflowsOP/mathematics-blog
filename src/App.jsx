@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { sendMsg } from './firebase-functions';
 import 'katex/dist/katex.min.css';
 import Latex from 'react-latex-next';
+import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import './App.scss';
 
 const App = () => {
@@ -34,6 +35,14 @@ const App = () => {
     setChannel(event.target.value);
   }
 
+  const config = {
+      tex2jax: {
+      inlineMath: [ ['$$','$$'], ["\\(","\\)"] ],
+      displayMath: [],
+      processEscapes: true
+    }
+  };
+
   return (
     <>
       <Outlet />
@@ -43,13 +52,16 @@ const App = () => {
       <p>Channel:</p>
       <input type="text" placeholder="Channel" value={channel} onChange={handleChannelChange} />
       <form onSubmit={handleSubmit}>
-      <p>This is a place dedicated to mathematics research and communication!</p>
-      <textarea placeholder="Enter text with LaTeX" rows={6} style={{ width: 420 }} 
+      <p>This is a place dedicated to mathematical research!</p>
+      <textarea placeholder="Enter text with LaTeX, or wrap your entire page in <MathJax>MathJax components, like so. </MathJax>" rows={6} style={{ width: 420 }} 
       value={text} onChange={(event) => { setText(event.target.value) }} />
       <br />
       <span>
         <p className="preview">Latex previewer: </p>
-        <Latex>{text ? text : "Nothing entered."}</Latex>
+        { (!(text.includes("<MathJax>") && text.includes("</MathJax>")))
+          ? (<Latex>{text ? text : "Nothing entered."}</Latex>)
+          : (<MathJaxContext version={2} config={config}><div><MathJax dynamic>{text.substring(text.indexOf("<MathJax>") + 9, text.lastIndexOf("</MathJax>"))}</MathJax></div></MathJaxContext>)
+        }
         <br />
         <button type="submit">Submit</button>
       </span>
