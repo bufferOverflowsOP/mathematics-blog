@@ -1,4 +1,3 @@
-import React from 'react';
 import Latex from 'react-latex-next';
 import { MathJax, MathJaxContext } from 'better-react-mathjax';
 import 'katex/dist/katex.min.css';

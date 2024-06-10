@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom'; 
 import { getMsgs } from './firebase-functions';
-import Box from './components/Box';
+import { Box } from './components';
 
 const App = () => {
   const [subject, setSubject] = useState("main");
@@ -13,7 +13,7 @@ const App = () => {
       getMsgs(subject, channel).then((data) => {
         setMsgs(data);
       })
-    }, 5000)
+    }, 15000)
     return () => clearInterval(interval)
   }, []);
 
@@ -53,10 +53,10 @@ const App = () => {
       <p>Channel:</p>
       <input type="text" placeholder="Channel" value={channel} onChange={handleChannelChange} />
       <br /> <br />
-      { true ? (msgs.map((msg) => {
-        <Box username={msg.username} pfp={msg.pfp} text={msg.text} />
+      { !(JSON.stringify(msgs)===JSON.stringify([])) ? (msgs.map((msg) => {
+        return (<Box text={msg.text} username={msg.username} pfp={msg.pfp} />)
       }))
-        : <p>No messages</p>
+        : (<p>No messages</p>)
       }
     </>
   )
